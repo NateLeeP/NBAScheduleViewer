@@ -1,3 +1,16 @@
+/****
+
+Schedule stylings
+
+
+****/
+
 .scheduleGame {
   padding: 10px;
+}
+
+.gameLink {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
 }
