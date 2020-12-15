@@ -6,6 +6,9 @@ const GameScore = ({currentGame}) => (
       Navigated to Game Score!
     </div>
     <div>
+      <iframe width="420" height="350" src="https://www.youtube.com/embed/NtkJNfWuUEY"></iframe>
+    </div>
+    <div>
       Current game: {currentGame['away']['name']} at {currentGame['home']['name']}
     </div>
   </div>
