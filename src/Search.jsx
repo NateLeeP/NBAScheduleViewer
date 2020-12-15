@@ -42,7 +42,7 @@ class Search extends React.Component {
       <input id='month' placeholder='MM' onChange={(e) => {this.handleSearchChange(e)}}></input>
       <input id='day' placeholder='DD' onChange={(e) => {this.handleSearchChange(e)}}></input>
       <button onClick={(e) => {this.handleInputSubmit(e)}}>Click Me!</button>
-      <Schedule games={this.state.games} />
+      <Schedule games={this.state.games} updateRender={this.props.updateRender} updateCurrentGame={this.props.updateCurrentGame} />
       </div>
     )
   }
