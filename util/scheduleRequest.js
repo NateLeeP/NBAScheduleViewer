@@ -5,9 +5,7 @@ const api_base_url = configObj['api_base_url'];
 const token = configObj['token'];
 const scheduleRequest = (year, month, day) => {
 
-  return axios.get(`/schedule/${year}/${month}/${day}`, {
-
-  })
+  return axios.get(`/schedule/${year}/${month}/${day}`)
 }
 
 export default scheduleRequest;
