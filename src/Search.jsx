@@ -1,11 +1,11 @@
 import React from 'react';
 import scheduleRequest from '../util/scheduleRequest.js';
-
+import sampleScheduleData from '../sampleScheduleData.js';
 class Search extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {year: '', month: '', day: ''}
+    this.state = {year: '', month: '', day: '', games: sampleScheduleData}
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleInputSubmit = this.handleInputSubmit.bind(this);
   }
@@ -22,13 +22,12 @@ class Search extends React.Component {
   handleInputSubmit(e) {
     e.preventDefault();
     scheduleRequest(this.state.year, this.state.month, this.state.day)
-    .then((results) => {
-      console.log(results);
-      /*
-      for (var game of games) {
-        //console.log('Home team: ', game["home"]["name"], ' Away Team: ', game["away"]["name"])
-      }
-      */
+    .then(({data}) => {
+      var newStateObj = this.state;
+      newStateObj['games'] = data.games
+      this.setState({
+        newStateObj
+      })
     })
     .catch((err) => {
       console.log("Error in schedule request function", err);
