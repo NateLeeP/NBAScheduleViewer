@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/NateLeeP/NBAScheduleViewer/issues"
   },
-  "homepage": "https://github.com/NateLeeP/NBAScheduleViewer#readme"
+  "homepage": "https://github.com/NateLeeP/NBAScheduleViewer#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
