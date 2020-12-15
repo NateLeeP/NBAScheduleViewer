@@ -1,0 +1,19 @@
+{
+  "name": "nbamvp",
+  "version": "1.0.0",
+  "description": "Application that displays daily NBA schedule with links to highlights, box score, and social media",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NateLeeP/NBAScheduleViewer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NateLeeP/NBAScheduleViewer/issues"
+  },
+  "homepage": "https://github.com/NateLeeP/NBAScheduleViewer#readme"
+}
