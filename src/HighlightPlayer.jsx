@@ -16,7 +16,7 @@ const HighlightPlayer = ({game}) => {
     .catch((err) => {
       console.log("Error in useEffects function! Error: ", err);
     })
-  })
+  }, [])
   */
   return (
     <div>
