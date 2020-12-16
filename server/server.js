@@ -3,6 +3,7 @@ const path = require('path');
 const PORT = 3000
 const app = express();
 const axios = require('axios');
+const { cleanSummaryData } = require('../util/cleanSummaryData.js');
 
 const months = {
   '01': 'January',
@@ -27,7 +28,7 @@ app.use(function(req, res, next) {
 app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/schedule/:year/:month/:day', (req, res) => {
-  const {year, month, day} = req.params
+  const {year, month, day} = req.params;
   axios.get(`http://api.sportradar.us/nba/trial/v7/en/games/${year}/${month}/${day}/schedule.json?api_key=cggng4r89hw2bh6q2u6mx9mw`)
   .then(({data}) => {
     //console.log(data);
@@ -36,6 +37,17 @@ app.get('/schedule/:year/:month/:day', (req, res) => {
   .catch((err) => {
     console.log("error in schedule route! Error: ", err);
     res.sendStatus(500);
+  })
+})
+
+app.get('/summary/:gameId', (req, res) => {
+  const {gameId} = req.params
+  axios.get(`http://api.sportradar.us/nba/trial/v7/en/games/${gameId}/summary.json?api_key=cggng4r89hw2bh6q2u6mx9mw`)
+  .then(({data}) => {
+    res.status(200).send(cleanSummaryData(data));
+  })
+  .catch((err) => {
+    console.log("Error in summary route! Error: ", err);
   })
 })
 
@@ -62,6 +74,8 @@ app.get('/highlights/:away/:home/:date', (req, res) => {
   })
 
 })
+
+
 
 
 app.listen(PORT, () => {
