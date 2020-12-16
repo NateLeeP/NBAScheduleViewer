@@ -14,3 +14,29 @@ Schedule stylings
   text-decoration: underline;
   cursor: pointer;
 }
+
+
+
+/*****
+
+
+Box Score styles
+
+
+
+*****/
+
+.playerStatLine {
+  display: flex;
+}
+
+.boxScoreSpace {
+  flex-grow: 6;
+}
+
+.playerName {
+  width: 200px
+}
+.stat {
+  width: 60px
+}
