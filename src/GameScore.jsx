@@ -1,6 +1,6 @@
 import React from 'react'
 import HighlightPlayer from './HighlightPlayer.jsx';
-
+import BoxScore from './BoxScore.jsx';
 const GameScore = ({currentGame}) => (
   <div className='gameScore'>
     <div>
@@ -8,8 +8,9 @@ const GameScore = ({currentGame}) => (
     </div>
     <HighlightPlayer game={currentGame} />
     <div>
-      Current game: {currentGame['away']['name']} at {currentGame['home']['name']}
+
     </div>
+    <BoxScore game={currentGame} />
   </div>
 )
 
