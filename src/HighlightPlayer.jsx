@@ -2,9 +2,10 @@ import React, {useEffect, useState} from 'react';
 import getHiglights from '../util/youtubeRequest.js'
 
 const HighlightPlayer = ({game}) => {
-  const [videoID, setVideoId] = useState('RtP0AZbFvHI');
+  const [videoID, setVideoId] = useState('');
   /*
   Prevent unneccessary API calls
+    */
   useEffect(() => {
     // call YouTube API function here
     const awayTeam = game['away']['name'].split(' ')[game['away']['name'].split(' ').length - 1]
@@ -17,7 +18,7 @@ const HighlightPlayer = ({game}) => {
       console.log("Error in useEffects function! Error: ", err);
     })
   }, [])
-  */
+
   return (
     <div>
       <iframe width="420" height="350" src={`https://www.youtube.com/embed/${videoID}`}></iframe>
