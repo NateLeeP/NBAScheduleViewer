@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import sampleSummaryData from '../sampleSummaryData.js';
+import sampleSummaryData from '../sampleData/sampleSummaryData.js';
 import PlayerStatLine from './PlayerStatLine.jsx';
-import headersPlayer from '../headersPlayer';
-import axios from 'axios'
+import headersPlayer from './headersPlayer';
+import summaryRequest from '../util/summaryRequest.js';
+
 const BoxScore = ({game}) => {
 
   const [summary, setSummary] = useState(sampleSummaryData)
   const [homeTeam, setHomeTeam] = useState(true)
-
+  /*
+  eliminate unnecessary API calls
+  */
   useEffect(() => {
     // call summary request function here
-    axios.get(`/summary/${game['id']}`)
+    summaryRequest(game['id'])
     .then(({data}) => {
       setSummary(data);
     })
@@ -29,6 +32,7 @@ const BoxScore = ({game}) => {
         <PlayerStatLine player={player} />
       ))}
     <PlayerStatLine player={summary[(homeTeam ? 'home' : 'away')]['team']} />
+
     </div>
   )
 }
