@@ -40,3 +40,27 @@ Box Score styles
 .stat {
   width: 60px
 }
+
+.tweetContainer {
+  height: 500px;
+  overflow: scroll;
+  width:300px;
+}
+
+.highlightTweetContainer {
+  display:flex;
+}
+
+
+/*******
+
+
+General Styling
+
+
+*******/
+
+.title {
+  font-size: large;
+  font-weight: bolder;
+}
