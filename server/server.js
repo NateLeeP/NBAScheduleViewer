@@ -4,21 +4,14 @@ const PORT = 3000
 const app = express();
 const axios = require('axios');
 const { cleanSummaryData } = require('../util/cleanSummaryData.js');
+const { createTimeRange, months } = require('../util/adjustTimeRange.js');
+// API tokens
+const { sportRadarConfigObj } = require('../sportRadarConfig.js');
+const { youtubeConfigObj } = require('../YouTubeConfig.js');
+const { twitterConfigObj } = require('../TwitterConfig.js');
 
-const months = {
-  '01': 'January',
-  '02': 'February',
-  '03': 'March',
-  '04': 'April',
-  '05': 'May',
-  '06': 'June',
-  '07': 'July',
-  '08': 'August',
-  '09': 'September',
-  '10': 'October',
-  '11': 'November',
-  '12': 'December'
-}
+
+
 app.use(function(req, res, next) {
   res.header("access-control-allow-origin", "*"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -29,9 +22,8 @@ app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/schedule/:year/:month/:day', (req, res) => {
   const {year, month, day} = req.params;
-  axios.get(`http://api.sportradar.us/nba/trial/v7/en/games/${year}/${month}/${day}/schedule.json?api_key=cggng4r89hw2bh6q2u6mx9mw`)
+  axios.get(`http://api.sportradar.us/nba/trial/v7/en/games/${year}/${month}/${day}/schedule.json?api_key=${sportRadarConfigObj['token']}`)
   .then(({data}) => {
-    //console.log(data);
     res.status(200).send(data);
   })
   .catch((err) => {
@@ -42,7 +34,7 @@ app.get('/schedule/:year/:month/:day', (req, res) => {
 
 app.get('/summary/:gameId', (req, res) => {
   const {gameId} = req.params
-  axios.get(`http://api.sportradar.us/nba/trial/v7/en/games/${gameId}/summary.json?api_key=cggng4r89hw2bh6q2u6mx9mw`)
+  axios.get(`http://api.sportradar.us/nba/trial/v7/en/games/${gameId}/summary.json?api_key=${sportRadarConfigObj['token']}`)
   .then(({data}) => {
     res.status(200).send(cleanSummaryData(data));
   })
@@ -61,11 +53,10 @@ app.get('/highlights/:away/:home/:date', (req, res) => {
       q: `${away} at ${home} | FULL GAME HIGHLIGHTS | ${months[date.split('-')[1]]} ${date.split('-')[2]} , ${date.split('-')[0]}`,
       type: 'video',
       videoEmbeddable: true,
-      key: 'AIzaSyBmXIAKJW3MhpTVsUMEII6G4ABHW_8WZlI'
+      key: youtubeConfigObj['token']
     }
   })
   .then(({data}) => {
-    console.log(data['items'][0]['id'])
     res.status(200).send(data);
   })
   .catch((err) => {
@@ -75,7 +66,22 @@ app.get('/highlights/:away/:home/:date', (req, res) => {
 
 })
 
-
+app.get('/tweets/:q/:date', (req, res) => {
+  const {q, date} = req.params;
+  var [start_time, end_time] = createTimeRange(date);
+  axios.get(`https://api.twitter.com/2/tweets/search/recent?start_time=${start_time}&end_time=${end_time}&query=${q}&max_results=100&tweet.fields=public_metrics`, {
+    headers: {
+      'Authorization': `Bearer ${twitterConfigObj['api_key']}`
+    }
+  })
+  .then(({data}) => {
+    res.status(200).send(data)
+  })
+  .catch((err) => {
+    console.log("error with tweets route! Error: ", err);
+    res.sendStatus(500);
+  })
+})
 
 
 app.listen(PORT, () => {
