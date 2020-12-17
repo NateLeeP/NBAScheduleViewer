@@ -1,0 +1,66 @@
+/****
+
+Schedule stylings
+
+
+****/
+
+.scheduleGame {
+  padding: 10px;
+}
+
+.gameLink {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
+/*****
+
+
+Box Score styles
+
+
+
+*****/
+
+.playerStatLine {
+  display: flex;
+}
+
+.boxScoreSpace {
+  flex-grow: 6;
+}
+
+.playerName {
+  width: 200px
+}
+.stat {
+  width: 60px
+}
+
+.tweetContainer {
+  height: 500px;
+  overflow: scroll;
+  width:300px;
+}
+
+.highlightTweetContainer {
+  display:flex;
+}
+
+
+/*******
+
+
+General Styling
+
+
+*******/
+
+.title {
+  font-size: large;
+  font-weight: bolder;
+}
