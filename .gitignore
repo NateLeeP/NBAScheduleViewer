@@ -9,6 +9,7 @@ lerna-debug.log*
 # Prevent API key from leaking
 sportRadarConfig.js
 YouTubeConfig.js
+TwitterConfig.js
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
