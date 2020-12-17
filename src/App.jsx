@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Search from './Search.jsx';
 import GameScore from './GameScore.jsx';
-import sampleScheduleData from '../sampleScheduleData.js';
+import sampleScheduleData from '../sampleData/sampleScheduleData.js';
 
 class App extends React.Component {
 
@@ -40,7 +40,7 @@ class App extends React.Component {
     } else {
       return (
         <div>
-          <GameScore currentGame={this.state.currentGame} />
+          <GameScore updateRender={this.updateRender} currentGame={this.state.currentGame} />
         </div>
       )
     }
